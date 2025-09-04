@@ -39,7 +39,14 @@ sudo dnf install -y nodejs
 sudo dnf install -y wget
 wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo rpm --import -
 sudo dnf config-manager --add-repo https://dl.google.com/linux/chrome/rpm/stable/x86_64
-sudo dnf install -y google-chrome-stable
+
+# If GPG check fails, use one of these alternatives:
+# Option 1: Install with GPG check disabled (quick fix)
+sudo dnf install -y google-chrome-stable --nogpgcheck
+
+# Option 2: Verify GPG key and retry (recommended)
+# sudo rpm -qa gpg-pubkey* | grep -i google
+# sudo dnf install -y google-chrome-stable
 
 # Install dependencies
 npm install
@@ -209,6 +216,22 @@ curl http://localhost/json
 ## Troubleshooting
 
 ### Common Issues
+
+**GPG check failed during Chrome installation:**
+```bash
+# Verify GPG key was imported correctly
+sudo rpm -qa gpg-pubkey* | grep -i google
+
+# If no Google key found, re-import:
+wget -q -O - https://dl.google.com/linux/linux_signing_key.pub | sudo rpm --import -
+
+# Clear DNF cache and retry
+sudo dnf clean packages
+sudo dnf install -y google-chrome-stable
+
+# If still failing, install without GPG check
+sudo dnf install -y google-chrome-stable --nogpgcheck
+```
 
 **Chrome won't start:**
 ```bash
