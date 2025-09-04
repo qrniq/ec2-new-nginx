@@ -1,0 +1,58 @@
+{
+  "name": "nginx-chrome-debug-proxy",
+  "version": "1.0.0",
+  "description": "Nginx reverse proxy for headless Chrome remote debugging with WebSocket support",
+  "main": "test-connection.js",
+  "scripts": {
+    "test": "node test-connection.js",
+    "start-chrome": "./start-chrome.sh",
+    "stop-chrome": "pkill -f 'remote-debugging-port' || true",
+    "status": "./start-chrome.sh --status",
+    "install-chrome": "echo 'Please install Google Chrome manually on AWS Linux 2023'",
+    "setup": "npm install && echo 'Run: sudo nginx -t && sudo systemctl reload nginx'"
+  },
+  "keywords": [
+    "nginx",
+    "chrome",
+    "headless",
+    "remote-debugging",
+    "websocket",
+    "proxy",
+    "aws",
+    "ec2",
+    "chrome-remote-interface"
+  ],
+  "author": "Terragon Labs",
+  "license": "MIT",
+  "dependencies": {
+    "chrome-remote-interface": "^0.32.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  },
+  "engines": {
+    "node": ">=14.0.0",
+    "npm": ">=6.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/terragon-labs/nginx-chrome-debug-proxy"
+  },
+  "bugs": {
+    "url": "https://github.com/terragon-labs/nginx-chrome-debug-proxy/issues"
+  },
+  "homepage": "https://github.com/terragon-labs/nginx-chrome-debug-proxy#readme",
+  "config": {
+    "chrome_port": "48333",
+    "nginx_port": "80",
+    "test_url": "https://www.example.com",
+    "screenshot_filename": "screenshot.png"
+  },
+  "os": [
+    "linux"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ]
+}
